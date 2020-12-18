@@ -149,3 +149,11 @@ input[type='number'] {
 .list li:hover .delete-btn {
   opacity: 1;
 }
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.delete-btn:active {
+  transform: translate(-100%, -50%) scale(0.95);
+}
