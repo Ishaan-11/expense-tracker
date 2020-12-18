@@ -7,14 +7,14 @@ const balance = document.getElementById('balance'),
   amount = document.getElementById('amount');
 
 
-const dummyTransactions = [
+/* const dummyTransactions = [
   { id: 1, text: 'Flower', amount: -20 },
   { id: 2, text: 'Salary', amount: 300 },
   { id: 3, text: 'Book', amount: -10 },
   { id: 4, text: 'Camera', amount: 150 }
-];
+]; */
 
-let transactions = dummyTransactions;
+let transactions = JSON.parse(localStorage.getItem('transactions')) ?? [];
 
 // Add new transaction
 function addNewTransaction(e) {
@@ -34,6 +34,8 @@ function addNewTransaction(e) {
     showTransactionHistory(transaction);
 
     updateBalance();
+
+    updateLocalStorage();
 
     text.value = '';
     amount.value = '';
@@ -87,7 +89,14 @@ function updateBalance() {
 function removeTransaction(transId) {
   transactions = transactions.filter(item => item.id !== transId);
 
+  updateLocalStorage();
+
   init();
+}
+
+// Update local storage transactions
+function updateLocalStorage() {
+  localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
 // Init app
